@@ -34,7 +34,7 @@ for year in ['2015']:
 
 # Set up head_2018
 for year in ['2018']:
-    for split in ['trainval', 'test']:
+    for split in ['trainval', 'trainbb', 'test']:
         name = 'head_{}_{}'.format(year, split)
         __sets[name] = (lambda split=split, year=year: head(split, year))
 
