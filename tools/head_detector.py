@@ -72,7 +72,7 @@ def demo(net, image_name):
 
     # Load the demo image
     im_file = os.path.join(cfg.DATA_DIR, 'demo', image_name)
-    im_file = os.path.join(cfg.DATA_DIR, 'demo', 'test3', image_name)
+    im_file = os.path.join('/home/tangwang/test3/', image_name)
     # im_file = os.path.join(cfg.DATA_DIR, 'HEADdevkit2018/HEAD2018/JPEGImages/', image_name)
     im = cv2.imread(im_file)
 
@@ -113,21 +113,15 @@ def parse_args():
     return args
 
 if __name__ == '__main__':
+
     cfg.TEST.HAS_RPN = True  # Use RPN for proposals
 
     args = parse_args()
 
-    prototxt = os.path.join(cfg.MODELS_DIR, NETS[args.demo_net][0],
-                            'faster_rcnn_alt_opt', 'faster_rcnn_test.pt')
-    caffemodel = os.path.join(cfg.DATA_DIR, 'faster_rcnn_models',
-                              NETS[args.demo_net][1])
-
     prototxt = os.path.join(cfg.ROOT_DIR, 'models', 'head', 'VGG16','faster_rcnn_end2end','test.prototxt')
-    caffemodel = os.path.join(cfg.ROOT_DIR, 'output', 'faster_rcnn_end2end', 'head_2018_trainval') 
+
     iter_num = 50000
-    # caffemodel = os.path.join(cfg.ROOT_DIR, 'output/faster_rcnn_end2end/head_2018_trainval/' 'vgg16_faster_rcnn_iter_' + str(iter_num) + '.caffemodel')
-    caffemodel = os.path.join('/data/chenkai/trained_models/py-faster-rcnn', 'output/faster_rcnn_end2end/head_2018_trainbb/', 'vgg16_faster_rcnn_iter_' + str(iter_num) + '.caffemodel')
-    #caffemodel = os.path.join('/data/chenkai/trained_models/py-faster-rcnn', 'output/faster_rcnn_end2end/head_2018_trainval/', 'vgg16_faster_rcnn_iter_' + str(iter_num) + '.caffemodel')
+    caffemodel = os.path.join(cfg.DATA_DIR, 'vgg16_faster_rcnn_iter_' + str(iter_num) + '.caffemodel')
 
 
     if not os.path.isfile(caffemodel):
@@ -149,15 +143,6 @@ if __name__ == '__main__':
     for i in xrange(2):
         _, _= im_detect(net, im)
 
-    im_names = ['ticket1_in_0000010.jpg', 'EVS3_0000255.jpg']
-    im_names = ['0000008.jpg',
-                '0000009.jpg',
-                '0000010.jpg',
-                '0000011.jpg',
-                '0000012.jpg',
-                '0000013.jpg',
-                '0000014.jpg'
-                ]
     im_names = os.listdir('/home/tangwang/test3')
     im_names = im_names[0:10]
     for im_name in im_names:
